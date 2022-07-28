@@ -25,3 +25,7 @@ dist-ssr
 
 # Build output
 dist/
+
+# Secret key
+gh-pages
+gh-pages.pub
