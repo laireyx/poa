@@ -2,6 +2,9 @@ import { Application } from "pixi.js";
 import { ScrollingBackgroundScene } from "./scene/background.mjs";
 import SceneManager from "./scene/manager.mjs";
 
+import nebula from "../../img/Dynamic Space Background FREE/Nebula Blue.png";
+import stars from "../../img/Dynamic Space Background FREE/Stars Small_1.png";
+
 class Game {
   constructor() {
     this.initPixi();
@@ -23,13 +26,13 @@ class Game {
   start() {
     this.sceneManager.push(
       new ScrollingBackgroundScene(this.app, { scrollSpeed: 4 }).setBackground(
-        "/img/Dynamic Space Background FREE/Nebula Blue.png"
+        nebula
       )
     );
     this.sceneManager.push(
       new ScrollingBackgroundScene(this.app, {
         scrollSpeed: 20,
-      }).setBackground("/img/Dynamic Space Background FREE/Stars Small_1.png")
+      }).setBackground(stars)
     );
   }
 }
