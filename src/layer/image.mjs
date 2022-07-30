@@ -37,9 +37,15 @@ class ImageLayer extends Layer {
     return this.imageSprite.height;
   }
 
+  /**
+   * @type {number}
+   */
   get x() {
     return this.imageSprite.x;
   }
+  /**
+   * @type {number}
+   */
   get y() {
     return this.imageSprite.y;
   }
@@ -51,9 +57,15 @@ class ImageLayer extends Layer {
     this.imageSprite.y = newY;
   }
 
+  /**
+   * @type {number}
+   */
   get tileX() {
     return this.imageSprite.tilePosition.x;
   }
+  /**
+   * @type {number}
+   */
   get tileY() {
     return this.imageSprite.tilePosition.y;
   }

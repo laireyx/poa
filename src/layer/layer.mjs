@@ -5,6 +5,10 @@ class Layer {
     this.container = new Container();
   }
 
+  /**
+   *
+   * @param {number} delta
+   */
   ticker(delta) {}
 
   onAttach() {}

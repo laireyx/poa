@@ -1,4 +1,4 @@
-import { game } from "./modules/game.mjs";
+import { game } from "./game/game.mjs";
 
 window.addEventListener("load", () => {
   window.game = game;

@@ -6,7 +6,7 @@ class SceneManager {
   sceneStack = [];
 
   /**
-   * Scene constructor
+   * Scene manager constructor
    */
   constructor() {
     this.container = new Container();
@@ -24,7 +24,7 @@ class SceneManager {
         this.pop();
         break;
       case SceneManager.ChagneScene.CLEAR_TOP:
-        while (this.sceneStack.length > 0) this.pop();
+        this.pop();
         this.sceneStack = [];
         break;
     }
@@ -37,15 +37,16 @@ class SceneManager {
    * @param {Scene} newScene
    */
   push(newScene) {
-    this.container.addChild(newScene.container);
     newScene.onStart();
     this.sceneStack.push(newScene);
+
+    this.container.removeChildren();
+    this.container.addChild(newScene.container);
   }
 
   pop() {
     const topScene = this.sceneStack.pop();
     topScene?.onEnd();
-    this.container.removeChild(topScene);
   }
 }
 

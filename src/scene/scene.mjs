@@ -8,12 +8,7 @@ import { Container, Ticker } from "pixi.js";
 class Scene {
   /** @type {Layer[]} */
   layers = [];
-  /**
-   *
-   * @param {Application} app
-   */
-  constructor(app) {
-    this.app = app;
+  constructor() {
     this.container = new Container();
     this.ticker = this.ticker.bind(this);
   }
