@@ -4,29 +4,46 @@
 import { ScrollingBackgroundLayer } from "../layer/background.mjs";
 import Scene from "./scene.mjs";
 
-import nebula from "../../img/Dynamic Space Background FREE/Nebula Blue.png";
-import stars from "../../img/Dynamic Space Background FREE/Stars Small_1.png";
-import ButtonLayer from "../layer/button.mjs";
+import nebula from "../../img/title/nebula/blue.png";
+import smallStars from "../../img/title/stars/small1.png";
+import smallStars2 from "../../img/title/stars/small2.png";
+import bigStars from "../../img/title/stars/big1.png";
+import bigStars2 from "../../img/title/stars/big2.png";
+import MenuLayer from "../layer/menu.mjs";
 
 class TitleScene extends Scene {
   constructor() {
     super();
 
-    this.nebulaLayer = new ScrollingBackgroundLayer(nebula, {
-      scrollSpeed: 4,
-    });
-    this.starsLayer = new ScrollingBackgroundLayer(stars, {
-      scrollSpeed: 8,
-    });
+    this.spaceLayers = [
+      new ScrollingBackgroundLayer(nebula, {
+        scrollSpeed: 4,
+      }),
+      new ScrollingBackgroundLayer(smallStars, {
+        scrollSpeed: 6,
+      }),
+      new ScrollingBackgroundLayer(smallStars2, {
+        scrollSpeed: 8,
+      }),
+      // new ScrollingBackgroundLayer(bigStars, {
+      //   scrollSpeed: 10,
+      // }),
+      new ScrollingBackgroundLayer(bigStars2, {
+        scrollSpeed: 12,
+      }),
+    ];
 
-    this.buttonLayer = new ButtonLayer("poA");
+    this.menuLayer = new MenuLayer()
+      .addButton("poA")
+      .addButton("Continue")
+      .addButton("Exit")
+      .build();
 
-    this.attachLayer(this.nebulaLayer);
-    this.attachLayer(this.starsLayer);
-    this.attachLayer(this.buttonLayer);
+    this.spaceLayers.forEach((layer) => this.attachLayer(layer));
+    this.attachLayer(this.menuLayer);
 
-    this.buttonLayer.x = (this.container.width - this.buttonLayer.width) / 2;
-    this.buttonLayer.y = (this.container.height - this.buttonLayer.height) / 2;
+    this.menuLayer.x = (this.container.width - this.menuLayer.width) / 2;
+    this.menuLayer.y = (this.container.height - this.menuLayer.height) / 2;
   }
 }
 

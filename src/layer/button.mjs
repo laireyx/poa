@@ -1,4 +1,4 @@
-import { Text } from "pixi.js";
+import { Graphics, Text } from "pixi.js";
 import Layer from "./layer.mjs";
 
 class ButtonLayer extends Layer {
@@ -7,8 +7,9 @@ class ButtonLayer extends Layer {
   /**
    *
    * @param {string} text
+   * @param {function} cb
    */
-  constructor(text) {
+  constructor(text, cb = null) {
     super();
 
     this.text = new Text(text, {
@@ -28,6 +29,7 @@ class ButtonLayer extends Layer {
       this.hovering = false;
     });
 
+    if (cb) this.text.on("click", cb);
     this.container.addChild(this.text);
   }
 
@@ -43,33 +45,6 @@ class ButtonLayer extends Layer {
     if (this.hoverTime > 1) this.hoverTime = 1;
 
     this.text.style.fill = ~~(~~(0x88 + 0x77 * this.hoverTime) * 0x010101);
-  }
-
-  get width() {
-    return this.text.width;
-  }
-  get height() {
-    return this.text.height;
-  }
-
-  /**
-   * @type {number}
-   */
-  get x() {
-    return this.text.x;
-  }
-  /**
-   * @type {number}
-   */
-  get y() {
-    return this.text.y;
-  }
-
-  set x(newX) {
-    this.text.x = newX;
-  }
-  set y(newY) {
-    this.text.y = newY;
   }
 }
 
