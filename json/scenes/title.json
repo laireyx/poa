@@ -1,0 +1,37 @@
+{
+  "name": "title",
+  "background": [
+    {
+      "type": "scroll",
+      "src": "/img/title/nebula/blue.png",
+      "scrollOpts": {
+        "scrollSpeed": 4,
+        "infinite": true
+      }
+    },
+    {
+      "type": "scroll",
+      "src": "/img/title/stars/small1.png",
+      "scrollOpts": {
+        "scrollSpeed": 6,
+        "infinite": true
+      }
+    },
+    {
+      "type": "scroll",
+      "src": "/img/title/stars/small2.png",
+      "scrollOpts": {
+        "scrollSpeed": 8,
+        "infinite": true
+      }
+    },
+    {
+      "type": "scroll",
+      "src": "/img/title/stars/big2.png",
+      "scrollOpts": {
+        "scrollSpeed": 12,
+        "infinite": true
+      }
+    }
+  ]
+}
