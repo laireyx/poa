@@ -1,6 +1,6 @@
 import { Container } from "pixi.js";
 import { game } from "../game/game.js";
-import Scene from "./scene.js";
+import type Scene from "./scene.js";
 
 enum ChangeScene {
   REPLACE_TOP = 1, // Default
@@ -32,10 +32,16 @@ class SceneManager {
         break;
     }
 
-    this.push(newScene);
+    this.push(sceneName);
   }
 
-  push(newScene: Scene) {
+  push(sceneName: string) {
+    const newScene = game.scenes.get(sceneName);
+    if (!newScene)
+      throw new Error(
+        `Scene with name "${sceneName}" is not found in the game instance`
+      );
+
     newScene.onStart();
     this.sceneStack.push(newScene);
 

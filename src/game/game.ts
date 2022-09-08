@@ -41,7 +41,7 @@ class Game {
     const titleScene = this.scenes.get("title");
     if (!titleScene) throw new Error("Cannot find title scene");
 
-    this.sceneManager.push(titleScene);
+    this.sceneManager.change("title");
   }
 }
 
