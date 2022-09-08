@@ -23,6 +23,8 @@ type ScrollingBackgroundLayerOption = {
   infinite?: boolean;
 };
 
+export type { ScrollingBackgroundLayerOption };
+
 class ScrollingBackgroundLayer extends TilingImageLayer {
   scrollSpeed = 4;
   infinite = true;

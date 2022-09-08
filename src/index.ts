@@ -10,5 +10,4 @@ declare global {
 window.addEventListener("load", () => {
   window.game = game;
   console.log("Game Start");
-  game.start();
 });

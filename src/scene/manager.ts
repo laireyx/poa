@@ -1,5 +1,4 @@
 import { Container } from "pixi.js";
-import { game } from "../game/game.js";
 import type Scene from "./scene.js";
 
 enum ChangeScene {
@@ -9,14 +8,22 @@ enum ChangeScene {
 
 class SceneManager {
   container: Container;
+  scenes: Map<String, Scene> = new Map();
   sceneStack: Scene[] = [];
 
   constructor() {
     this.container = new Container();
   }
 
+  addScene(scene: Scene): void {
+    if (this.scenes.has(scene.name)) {
+      throw new Error(`Scene name "${scene.name}" is already in use.`);
+    }
+    this.scenes.set(scene.name, scene);
+  }
+
   change(sceneName: string, mode = ChangeScene.REPLACE_TOP) {
-    const newScene = game.scenes.get(sceneName);
+    const newScene = this.scenes.get(sceneName);
     if (!newScene)
       throw new Error(
         `Scene with name "${sceneName}" is not found in the game instance`
@@ -36,7 +43,7 @@ class SceneManager {
   }
 
   push(sceneName: string) {
-    const newScene = game.scenes.get(sceneName);
+    const newScene = this.scenes.get(sceneName);
     if (!newScene)
       throw new Error(
         `Scene with name "${sceneName}" is not found in the game instance`

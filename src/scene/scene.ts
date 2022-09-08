@@ -2,10 +2,12 @@ import { Container, Ticker } from "pixi.js";
 import type Layer from "../layer/layer.js";
 
 class Scene {
+  name: string;
   container: Container;
   layers: Layer[] = [];
 
-  constructor() {
+  constructor(name: string) {
+    this.name = name;
     this.container = new Container();
     this.ticker = this.ticker.bind(this);
   }

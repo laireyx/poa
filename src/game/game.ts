@@ -1,22 +1,24 @@
 import type Scene from "../scene/scene.js";
 
 import { Application, InteractionManager } from "pixi.js";
-import TitleScene from "../scene/title.js";
 import SceneManager from "../scene/manager.js";
-import LabScene from "../scene/lab.js";
+import SceneLoader from "../loader/scene.js";
 
 class Game {
   app!: Application;
   interactionManager!: InteractionManager;
   sceneManager!: SceneManager;
-  scenes: Map<String, Scene> = new Map();
+  loadTask: Promise<boolean>;
 
   constructor() {
-    this.initPixi();
-    this.initScene();
+    this.loadTask = Promise.all([this.initPixi(), this.initScene()])
+      .then(() => true)
+      .catch(() => false);
+
+    this.loadTask.then(() => this.start());
   }
 
-  initPixi() {
+  async initPixi() {
     const cv = document.querySelector<HTMLCanvasElement>("#game-cv");
     if (!cv) throw new Error("Cannot find game canvas");
 
@@ -29,18 +31,21 @@ class Game {
     document.body.appendChild(this.app.view);
   }
 
-  initScene() {
+  async initScene() {
     this.sceneManager = new SceneManager();
+
+    const sceneLoader = new SceneLoader("/json/scenes");
+    const allScenes = await sceneLoader.load();
+
+    console.log(allScenes);
+    allScenes.forEach((scene: Scene) => {
+      this.sceneManager.addScene(scene);
+    });
+
     this.app.stage.addChild(this.sceneManager.container);
   }
 
   start() {
-    this.scenes.set("title", new TitleScene());
-    this.scenes.set("lab", new LabScene());
-
-    const titleScene = this.scenes.get("title");
-    if (!titleScene) throw new Error("Cannot find title scene");
-
     this.sceneManager.change("title");
   }
 }
