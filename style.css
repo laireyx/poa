@@ -10,6 +10,10 @@ body {
 }
 
 #game-cv {
-  width: 100vw;
-  margin: auto;
+  flex: 1;
+
+  max-width: 100vw;
+  max-height: 100vh;
+  object-fit: contain;
+  object-position: center center;
 }

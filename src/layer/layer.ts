@@ -1,15 +1,13 @@
 import { Container } from "pixi.js";
 
-class Layer {
+abstract class Layer {
+  container: Container;
+
   constructor() {
     this.container = new Container();
   }
 
-  /**
-   *
-   * @param {number} delta
-   */
-  ticker(delta) {}
+  abstract ticker(delta: number): void;
 
   onAttach() {}
   onDetach() {}

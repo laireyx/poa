@@ -1,66 +1,56 @@
-import { Sprite, Texture, TilingSprite } from "pixi.js";
-import Layer from "./layer.mjs";
+import { SpriteSource, Texture } from "pixi.js";
+import { TilingSprite } from "pixi.js";
+import { game } from "../../game/game.js";
+import Layer from "../layer.js";
 
-class ImageLayer extends Layer {
+class TilingImageLayer extends Layer {
+  imageSprite: TilingSprite;
+
   constructor() {
     super();
 
-    this.imageSprite = new Sprite(this.imageSource);
+    this.imageSprite = new TilingSprite(Texture.EMPTY);
     this.container.addChild(this.imageSprite);
   }
 
-  /**
-   * Set Image
-   * @param {SpriteSource} imageSource
-   */
-  setImage(imageSource) {
-    const imageSprite = Sprite.from(imageSource);
+  setImage(imageSource: SpriteSource) {
+    const imageSprite = TilingSprite.from(imageSource, {
+      width: game.app.screen.width,
+      height: game.app.screen.height,
+    });
 
     this.setSprite(imageSprite);
   }
 
-  /**
-   * Set image sprite
-   * @param {Sprite} imageSprite
-   */
-  setSprite(imageSprite) {
+  setSprite(imageSprite: TilingSprite) {
     this.container.removeChild(this.imageSprite);
 
     this.imageSprite = imageSprite;
     this.container.addChild(this.imageSprite);
   }
 
-  get width() {
+  get width(): number {
     return this.imageSprite.width;
   }
-  get height() {
+  get height(): number {
     return this.imageSprite.height;
   }
 
-  /**
-   * @type {number}
-   */
-  get x() {
+  get x(): number {
     return this.imageSprite.x;
   }
-  /**
-   * @type {number}
-   */
-  get y() {
+  get y(): number {
     return this.imageSprite.y;
   }
 
-  set x(newX) {
+  set x(newX: number) {
     this.imageSprite.x = newX;
   }
-  set y(newY) {
+  set y(newY: number) {
     this.imageSprite.y = newY;
   }
 
-  /**
-   * @type {number}
-   */
-  get tileX() {
+  get tileX(): number {
     return this.imageSprite.tilePosition.x;
   }
   /**
@@ -76,6 +66,10 @@ class ImageLayer extends Layer {
   set tileY(newY) {
     this.imageSprite.tilePosition.y = newY;
   }
+
+  ticker(delta: number): void {
+    delta;
+  }
 }
 
-export default ImageLayer;
+export default TilingImageLayer;

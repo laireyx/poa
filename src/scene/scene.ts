@@ -1,23 +1,16 @@
-/**
- * @typedef {import('pixi.js').Application} Application
- * @typedef {import("../layer/layer.mjs").default} Layer
- */
-
 import { Container, Ticker } from "pixi.js";
+import type Layer from "../layer/layer.js";
 
 class Scene {
-  /** @type {Layer[]} */
-  layers = [];
+  container: Container;
+  layers: Layer[] = [];
+
   constructor() {
     this.container = new Container();
     this.ticker = this.ticker.bind(this);
   }
 
-  /**
-   * Scene ticker
-   * @param {number} delta
-   */
-  ticker(delta) {
+  ticker(delta: number) {
     // Pass ticker event to all layers
     this.layers?.forEach((layer) => {
       layer.ticker(delta);
@@ -37,21 +30,13 @@ class Scene {
     Ticker.shared.remove(this.ticker);
   }
 
-  /**
-   * Attach a new layer
-   * @param {Layer} newLayer
-   */
-  attachLayer(newLayer) {
+  attachLayer(newLayer: Layer) {
     this.container.addChild(newLayer.container);
     newLayer.onAttach();
     this.layers.push(newLayer);
   }
 
-  /**
-   * Detach an existing layer
-   * @param {Layer} existingLayer
-   */
-  detachLayer(existingLayer) {
+  detachLayer(existingLayer: Layer) {
     const existingIdx = this.layers.indexOf(existingLayer);
     if (existingIdx > 0) {
       const [detachedLayer] = this.layers.splice(existingIdx, 1);

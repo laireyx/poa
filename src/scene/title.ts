@@ -1,17 +1,21 @@
 /**
  * @typedef {import('pixi.js').Application} Application
  */
-import { ScrollingBackgroundLayer } from "../layer/background.mjs";
-import Scene from "./scene.mjs";
+import { ScrollingBackgroundLayer } from "../layer/background.js";
+import Scene from "./scene.js";
 
 import nebula from "../../img/title/nebula/blue.png";
 import smallStars from "../../img/title/stars/small1.png";
 import smallStars2 from "../../img/title/stars/small2.png";
-import bigStars from "../../img/title/stars/big1.png";
+// import bigStars from "../../img/title/stars/big1.png";
 import bigStars2 from "../../img/title/stars/big2.png";
-import MenuLayer from "../layer/menu.mjs";
+import MenuLayer from "../layer/menu.js";
+import { game } from "../game/game.js";
 
 class TitleScene extends Scene {
+  spaceLayers: ScrollingBackgroundLayer[] = [];
+  menuLayer: MenuLayer;
+
   constructor() {
     super();
 
@@ -34,7 +38,9 @@ class TitleScene extends Scene {
     ];
 
     this.menuLayer = new MenuLayer()
-      .addButton("poA")
+      .addButton("poA", () => {
+        game.sceneManager.change("lab");
+      })
       .addButton("Continue")
       .addButton("Exit")
       .build();
