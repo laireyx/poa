@@ -9,12 +9,12 @@ abstract class Loader<T> {
 
   async load(): Promise<T[]> {
     const resourceIndex: ResourceIndex = await fetch(
-      `${this.path}/index.json`
+      `./${this.path}/index.json`
     ).then((resp) => resp.json());
 
     return await Promise.all(
       resourceIndex.map(async (resource) => {
-        const resourceJson = await fetch(`${this.path}/${resource}`).then(
+        const resourceJson = await fetch(`./${this.path}/${resource}`).then(
           (resp) => resp.json()
         );
 
